@@ -8,13 +8,14 @@
     - [Documenation](#documenation)
     - [Tutorials](#tutorials)
   - [USEFUL SITES](#useful-sites)
-    - [Design](#design)
     - [Testing/development](#testingdevelopment)
+    - [Design](#design)
     - [Examples](#examples)
   - [USEFUL LINKS/OTHER](#useful-linksother)
     - [Downloads](#downloads)
     - [Browser Extensions](#browser-extensions)
     - [VSCode Extensions](#vscode-extensions)
+    - [License Links](#license-links)
 
 ## RESOURCES
 
@@ -36,14 +37,13 @@
 * CSS Flex https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 
 ## USEFUL SITES
-### Design
-* Color picker https://www.w3schools.com/colors/colors_picker.asp
-* Color Scheme generator http://colormind.io/
 
 ### Testing/development
 * Quick test HTML and CSS https://www.w3schools.com/cssref/tryit.asp?filename=trycss_initial
 * Lorem Ipsum generator https://loremipsum.io/
-
+### Design
+* Color picker https://www.w3schools.com/colors/colors_picker.asp
+* Color Scheme generator http://colormind.io/
 ### Examples
 * Boostrap Examples https://expo.getbootstrap.com/
 
@@ -61,3 +61,10 @@ Description: This allows you to open the current file in your default   browser 
 Version: 2.0.0  
 Publisher: TechER  
 VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=techer.open-in-browser
+
+### License Links
+
+[GNU GPL3.0](https://choosealicense.com/licenses/gpl-3.0/)
+`[`GNU GPL3.0](https://choosealicense.com/licenses/gpl-3.0/)`
+[MIT](https://choosealicense.com/licenses/mit/)
+`[MIT](https://choosealicense.com/licenses/mit/)`
