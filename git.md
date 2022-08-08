@@ -1,13 +1,12 @@
 # **Git  cheatsheet**
 
-- [**Git  cheatsheet**](#git--cheatsheet)
-  - [git commands](#git-commands)
-  - [Options](#options)
-  - [Creating a new Project](#creating-a-new-project)
-  - [Merge checklist](#merge-checklist)
-  - [Push Checklist](#push-checklist)
-  - [Clone Checklist](#clone-checklist)
-  - [Default .gitignore_global](#default-gitignore_global)
+- [[#git commands|git commands]]
+- [[#Options|Options]]
+- [[#Creating a new Project|Creating a new Project]]
+- [[#Merge checklist|Merge checklist]]
+- [[#Push Checklist|Push Checklist]]
+- [[#Clone Checklist|Clone Checklist]]
+- [[#Default .gitignore_global|Default .gitignore_global]]
 
 ## git commands
 <table>
