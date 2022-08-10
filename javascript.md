@@ -42,6 +42,8 @@ Can only reprsent a single type and piece of data
 - Expressions return a value (math)
 - NaN - Not a number (but it's technically a number in JS)
 - Infinity - Dividing a number by 0 (also technically a number in JS)*
+- int - interger
+- float - has decimals
 
 [TOP](#javascript-cheatsheet)
 
@@ -93,7 +95,58 @@ parentObject.childObject.targetProperty;
 
 
 ## HTML DOM
-![[Pasted image 20220808132646.png]]
+![[tree.png]]
+
+Accessing DOM
+```js
+window.document;
+```
+
+Selecting HTML elements
+```html
+<h1 id="specialHeader">Best Chocolae Chip Cookies!</h1>
+```
+```js
+window.document.querySelector("h1"); 
+```
+
+Selecting by class
+```html
+<ol class="ol.style">
+	<li></li>
+	<li></li>
+	<li></li>
+</ol>
+```
+```js
+window.document.querySelector("ol.ol-style"); 
+```
+
+Selecting children
+```html
+<ol class="ol.style">
+	<li></li>
+	<li></li>
+	<li></li>
+</ol>
+```
+```js
+window.document.querySelector("ol>li"); //only selects the li
+```
+
+Selecting by ID
+```html
+<h1 id="specialHeader">Best Chocolae Chip Cookies!</h1>
+```
+```js
+window.document.getElementByID("specialHeader");
+```
+```js
+window.document.getElementByID("h1#specialHeader");
+```
+
+HTML ELEMENT === DOM OBJECT
+DOM objects are representations of html elements in the DOM (browser window)
 
 [TOP](#javascript-cheatsheet)
 
@@ -150,13 +203,44 @@ function addEmphasis(stringParam) {
 ```
 
 ```js
-function functionNameInCamelCase(acceptedParameter) { //curly brackets indicate body
+function functionNameInCamelCase(parametersSeparated, byCommas) { //curly brackets indicate body
   statement; //statements end with semicolon;
   statement; //We can call
   return; //use return o make the data inside the function available outside of it
 } //no semicolon!
 ```
 [TOP](#javascript-cheatsheet)
+
+### Function Expressions 
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function#named_function_expression
+
+Storing a function inside a variable
+```js
+const add = function(number1, number2) {
+	return number1 + number2;
+}; //NOTE SEMICOLON
+// This is known as the "function literal" way of declaring a funcion
+```
+Use a semicolon at the end, because we are assigning a value to a variable. Notice the function does not have a name.
+
+JS Interpreters (which interpret JS for programs to use) do **HOISTING**, or moving declarations of functions and variables to the top of their scope, before the execution of code.
+
+```js
+const result = add(3, 5);
+function add(number1, number2) {
+   return number1 + number2;
+}
+result;
+```
+The result is 8, because the function `add()` is **HOISTED** to the top, even though it is declared after our  `const result` in our code. This ONLY happens with function declarations, NOT expressions (see below, note the `const add = function()`)
+```js
+const result = add(3, 5);
+const add = function(number1, number2) {
+   return number1 + number2;
+}
+result;
+```
+The function in this code is an expression because it uses `const add =` instead of `function add()`. As a result, it has not been hoisted, and when we call `add()` in the first line, there is no function to call, as it  has not yet been defined.
 
 ### Calling a function
 
@@ -226,6 +310,79 @@ Go in parenthesis of function/method
 
 [TOP](#javascript-cheatsheet)
 
+## Scope
+
+Where code is located 
+What can access that code
+Whether that code can be modified
+### Local scope
+Variables inside of functions
+It is created and destroyed each time the function runs
+
+Wrong:
+```js
+function sampleFunction() {
+  let localString = "This is a local variable";
+  window.alert(localString);
+  localString = "This is a local variable update!!";
+  window.alert(localString);
+}
+
+sampleFunction(); 
+window.alert(localString); // Uncaught ReferenceError: localString is not defined
+```
+
+Right:
+```js
+function sampleFunction() {
+  let localString = "This is a local variable";
+  window.alert(localString);
+  localString = "This is a local variable update!!";
+  window.alert(localString);
+  return localString; // new line of code!
+}
+
+const globalString = sampleFunction();  // updated code!
+window.alert("The value of 'localString' at the global scope: " + globalString); // updated code!
+```
+
+You need to reurn in order to access the value of `localString` outside of the function `sampleFunction()`.
+
+### Global Scope
+
+Variables at the "top level" of a .js file
+Can be accessed and modified by all code
+Be careful about declaring local variables without LET!
+
+```js
+let globalString = "This is a global variable"; //outside of function
+
+function sampleFunction() {
+  window.alert(globalString);
+  globalString = "This is a global variable update!!";
+  window.alert(globalString);
+}
+
+window.alert(globalString);
+sampleFunction();
+window.alert(globalString);
+```
+
+```js
+let bunnyName = "Flopsy";
+
+function hippityHoppity() {
+  let bunnyName = "Mopsy";
+  window.alert(bunnyName);
+  bunnyName = "Cottontail";
+}
+
+hippityHoppity();
+window.alert(bunnyName);
+```
+
+[TOP](#javascript-cheatsheet)
+
 ## Other
 
 `myNumber += 5;` increments myNumber by 5
@@ -249,3 +406,159 @@ Statements do not reurn variables
 - interface logic - the scripts that allow the user to interact with the computer
 
 [TOP](#javascript-cheatsheet)
+
+### Scope
+
+### Property Methods
+What type of object a variable has
+Object.prototype.toString.call(VARNAME);
+
+### Event Handling
+
+event handler properties "listen" for an event on an object that it has been attached to. When he event hapens, the event handler runs our code as a reaction.
+
+```js
+target.eventHandler = function() { 
+	//function body
+};
+```
+
+remove an event handler
+```js
+target.eventHandler = null;
+```
+
+
+| event Handler | descripiton                                 | notes             |
+| ------------- | ------------------------------------------- | ----------------- |
+| onclick       | on mouse click                              | onevent, mouse    |
+| oncopy        | when all or some text is copied.            | onevent, mouse    |
+| onmouseover   | when the mouse is hovered over the element. | onevent, mouse    |
+| onkeydown     | when a keyboard key is pressed              | onevent, keyboard |
+| onkeyup       | when a keyboard key is released             | onevent, keyboard |
+| onload        | when loaded                                 | onevent,  window  |
+| onsubmit      | when form is submitted using submit button                                            |                   |
+
+
+oneven properies are named on + event, easy to remember.
+
+document.body === document.querySelector("body")
+
+Don't use in-line HTML event handlers. I'm not even going to include it.
+
+### Using event handlers in JS files
+Assume the following JS is linked in the head:
+```js
+// User Interface Logic
+let h1 = document.querySelector("h1");
+h1.onmouseover = function() {
+  window.alert("I am a heading element.");
+};
+
+let p = document.querySelector("p");
+p.onmouseover = function() {
+  document.querySelector("p>em").innerText = "Don't be surprised";
+};
+
+let img = document.querySelector("img");
+img.onmouseover = function() {
+  img.style.height = "700px";
+};
+```
+When this loads, we get the error:
+```
+Uncaught TypeError: Cannot set properties of null (setting 'onmouseover')
+    at scripts.js:3:16
+```
+
+This is because the JS file is linked in the head, and loads before the rest of the HTML loads. The JS loads first, and looks for `<h1>` which doesn't exist yet. However, we should keep JS files in the head.
+
+The following waits for the web page to load before loading the scripts in its body.
+```js
+window.onload = function() {
+	//function body
+};
+```
+This is a good place for event handlers.
+
+document.getElementByID("ID").blah.blah
+document.getElementByClassName("CLASSNAME").blah.blah
+
+```js
+function(e){
+	event.preventDefault ();
+};
+```
+
+```js
+if (!input1 || !hinput2)  {
+
+      //what to do if one of the inputs is missing (error)
+
+    } else {
+
+	//what we want to do
+
+	};
+```
+
+```js
+  target.addEventListener ("TYPE", function() {
+
+    //callback function
+    //or, w hat we want to run as the reaction event
+
+  });
+```
+
+Can call a function like this, useful for onevent
+```js
+let h1 = document.querySelector("h1");
+function alertHeading() {
+  window.alert("This is a heading element.");
+}
+h1.onclick = alertHeading;
+```
+
+Similarly, can call an event handler like this 
+```js
+// using a function declaration
+let h1 = document.querySelector("h1");
+function alertHeading() {
+  window.alert("This is a heading element.");
+}//function declaration
+
+h1.addEventListener("click", alertHeading); //pass click type and alertHeading function 
+```
+
+re-using functions 
+```js
+let h1 = document.querySelector("h1"); 
+let h2 = document.querySelector("h2"); 
+let h3 = document.querySelector("h3"); 
+let h4 = document.querySelector("h4"); 
+let h5 = document.querySelector("h5"); 
+let h6 = document.querySelector("h6"); 
+
+function alertHeadings() { //this type of declaration is hoisted
+  window.alert("This is a heading element.");
+}
+
+//can use this in stead
+	const alertHeadings = function() { //this type of declaration is not hoisted
+	  window.alert("This is a heading element.");
+	}
+
+
+h1.addEventListener("click", alertHeadings);
+h2.addEventListener("click", alertHeadings);
+h3.addEventListener("click", alertHeadings);
+h4.addEventListener("click", alertHeadings);
+h5.addEventListener("click", alertHeadings);
+h6.addEventListener("click", alertHeadings);
+```
+
+Removing an event listener
+```js
+h1.removeEventListener("click", alertHeading);
+```
